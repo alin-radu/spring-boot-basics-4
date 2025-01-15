@@ -1,6 +1,5 @@
-package com.dev.spring_basics;
+package com.dev.spring_basics.helloworld;
 
-import com.dev.spring_basics.game.Application02Configuration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Arrays;
@@ -9,11 +8,10 @@ public class Application02 {
 
     public static void main(String[] args) {
         // 1. launch a Spring Context;
-        var context = new AnnotationConfigApplicationContext(Application02Configuration.class);
+        try (var context = new AnnotationConfigApplicationContext(Application02Configuration.class)) {
+            // 2. configure things that we want Spring to manage -> @Configuration;
 
-        // 2. configure things that we want Spring to manage -> @Configuration;
-
-        // 3. retrieving beans managed by Spring;
+            // 3. retrieving beans managed by Spring;
 //        System.out.println(context.getBean("name"));
 //
 //        System.out.println(context.getBean("age"));
@@ -30,11 +28,12 @@ public class Application02 {
 //
 //        System.out.println(context.getBean(Address.class));
 
-        Arrays
-                .stream(context.getBeanDefinitionNames())
-                .forEach(b -> System.out.println("---> " + b));
+            Arrays
+                    .stream(context.getBeanDefinitionNames())
+                    .forEach(b -> System.out.println("---> " + b));
 
-        System.out.println(context.getBeanDefinitionCount());
+            System.out.println(context.getBeanDefinitionCount());
+        }
 
     }
 
