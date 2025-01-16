@@ -1,13 +1,10 @@
-package com.dev.spring_basics_2;
+package com.dev.spring_basics_2.game;
 
-import com.dev.spring_basics_2.game.GameRunner;
-import com.dev.spring_basics_2.game.GamingConsole;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.dev.spring_basics_2.game")
+//@ComponentScan("com.dev.spring_basics_2")
 public class Application {
 
     public static void main(String[] args) {

@@ -13,5 +13,7 @@ public class Application {
         var context = new AnnotationConfigApplicationContext(Application.class);
 
         Helpers.printContextBeans(context);
+
+        System.out.println("Application | Initialization of context completed.");
     }
 }

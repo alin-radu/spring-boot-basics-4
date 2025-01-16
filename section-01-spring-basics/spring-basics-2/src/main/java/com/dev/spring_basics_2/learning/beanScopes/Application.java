@@ -1,32 +1,26 @@
-package com.dev.spring_basics_2.learning.d2;
+package com.dev.spring_basics_2.learning.beanScopes;
 
 import com.dev.spring_basics_2.utils.Helpers;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 @Component
-class ClassA {
+class NormalClass {
 
 }
 
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Component
-//@Lazy
-class ClassB {
-    private final ClassA classA;
+class PrototypeClass {
 
-    ClassB(ClassA classA) {
-        System.out.println("ClassB | constructor | Some initialization logic goes here.");
-        this.classA = classA;
-    }
-
-    public void doSomething() {
-        System.out.println("ClassB | doSomething | Do something.");
-    }
 }
 
 //@SpringBootApplication
-@ComponentScan("com.dev.spring_basics_2.learning.d2")
+@ComponentScan("com.dev.spring_basics_2.learning.beanScopes")
 public class Application {
 
     public static void main(String[] args) {
@@ -37,6 +31,5 @@ public class Application {
 
         System.out.println("Application | Initialization of context completed.");
 
-        context.getBean(ClassB.class).doSomething();
     }
 }

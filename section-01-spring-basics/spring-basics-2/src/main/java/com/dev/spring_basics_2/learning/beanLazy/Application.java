@@ -1,4 +1,4 @@
-package com.dev.spring_basics_2.learning.d1;
+package com.dev.spring_basics_2.learning.beanLazy;
 
 import com.dev.spring_basics_2.utils.Helpers;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -26,7 +26,7 @@ class ClassB {
 }
 
 //@SpringBootApplication
-@ComponentScan("com.dev.spring_basics_2.learning.d1")
+@ComponentScan("com.dev.spring_basics_2.learning.beanLazy")
 public class Application {
 
     public static void main(String[] args) {
