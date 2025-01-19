@@ -1,10 +1,14 @@
 package com.dev.spring_boot_to_do_web_app.model;
 
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public class Todo {
     private int id;
     private String username;
+
+    @Size(min=3, message="Enter at least 3 characters")
     private String description;
     private LocalDate targetDate;
     private boolean done;
@@ -12,6 +16,9 @@ public class Todo {
     public Todo() {
     }
 
+    public Todo(int id, String username, String description, LocalDate targetDate) {
+        this(id, username, description, targetDate, false);
+    }
     public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
         this.id = id;
         this.username = username;

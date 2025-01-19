@@ -23,7 +23,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String gotoLoginPage() {
 
-        return "login";
+        return "loginPage";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -32,11 +32,12 @@ public class LoginController {
         if (authenticationService.authenticate(name, password)) {
             model.addAttribute("name", name);
 
-            return "welcome";
+            return "welcomePage";
         }
+
         model.put("errorMessage", "Invalid Credentials!, Please try again!");
 
-        return "login";
+        return "loginPage";
     }
 }
 
