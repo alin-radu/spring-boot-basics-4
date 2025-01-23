@@ -1,5 +1,6 @@
 package com.dev.spring_boot_rest_api_basics.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
@@ -11,9 +12,11 @@ public class User {
 
     @Size(min = 3, message = "Name should have at least two characters.")
     @Size(max = 50, message = "Name should have maximum fifty characters.")
+    @JsonProperty("user_name")
     private String name;
 
     @Past(message = "Birthdate should be in the past.")
+    @JsonProperty("birth_date")
     private LocalDate birthDate;
 
     public User() {
