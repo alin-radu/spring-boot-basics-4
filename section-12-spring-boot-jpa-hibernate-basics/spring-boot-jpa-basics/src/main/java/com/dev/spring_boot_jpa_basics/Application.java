@@ -1,4 +1,4 @@
-package com.dev.spring_boot_jpa_hibernate;
+package com.dev.spring_boot_jpa_basics;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

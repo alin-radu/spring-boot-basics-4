@@ -1,4 +1,4 @@
-package com.dev.spring_boot_jpa_hibernate.model;
+package com.dev.spring_boot_jpa_basics.model;
 
 import jakarta.persistence.*;
 

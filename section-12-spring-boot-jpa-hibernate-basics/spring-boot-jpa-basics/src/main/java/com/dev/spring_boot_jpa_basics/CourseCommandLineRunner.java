@@ -1,7 +1,7 @@
-package com.dev.spring_boot_jpa_hibernate;
+package com.dev.spring_boot_jpa_basics;
 
-import com.dev.spring_boot_jpa_hibernate.model.Course;
-import com.dev.spring_boot_jpa_hibernate.repository.CourseSpringDataJpaRepository;
+import com.dev.spring_boot_jpa_basics.model.Course;
+import com.dev.spring_boot_jpa_basics.repository.CourseSpringDataJpaRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

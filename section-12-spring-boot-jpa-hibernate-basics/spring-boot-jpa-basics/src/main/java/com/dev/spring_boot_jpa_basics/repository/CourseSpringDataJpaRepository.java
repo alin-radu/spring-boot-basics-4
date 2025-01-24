@@ -1,6 +1,6 @@
-package com.dev.spring_boot_jpa_hibernate.repository;
+package com.dev.spring_boot_jpa_basics.repository;
 
-import com.dev.spring_boot_jpa_hibernate.model.Course;
+import com.dev.spring_boot_jpa_basics.model.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

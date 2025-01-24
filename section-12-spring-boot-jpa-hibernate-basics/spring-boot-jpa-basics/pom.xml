@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dev</groupId>
-	<artifactId>spring-boot-jpa-hibernate</artifactId>
+	<artifactId>spring-boot-jpa-basics</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-boot-jpa-hibernate</name>
 	<description>Spring Boot basic</description>
