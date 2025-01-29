@@ -1,7 +1,6 @@
 package com.dev.spring_boot_full_stack_basics.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,7 +8,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
+//@Configuration
 public class BasicAuthenticationSecurityConfiguration {
 
     @Bean
@@ -27,7 +26,6 @@ public class BasicAuthenticationSecurityConfiguration {
                                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .csrf(AbstractHttpConfigurer::disable)
                         .build();
-
     }
 }
 
