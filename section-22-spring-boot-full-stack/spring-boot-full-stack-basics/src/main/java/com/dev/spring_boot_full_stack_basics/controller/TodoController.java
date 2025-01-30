@@ -2,6 +2,8 @@ package com.dev.spring_boot_full_stack_basics.controller;
 
 import com.dev.spring_boot_full_stack_basics.model.Todo;
 import com.dev.spring_boot_full_stack_basics.service.TodoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +13,9 @@ import java.util.List;
 public class TodoController {
 
     private final TodoService todoService;
-    public TodoController(TodoService todoService) {
+
+    @Autowired
+    public TodoController(@Qualifier("todoServiceImplJpa") TodoService todoService) {
         this.todoService = todoService;
     }
 
