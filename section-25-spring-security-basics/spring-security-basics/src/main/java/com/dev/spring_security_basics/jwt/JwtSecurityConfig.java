@@ -1,11 +1,10 @@
-package com.dev.spring_boot_full_stack_basics.jwt;
+package com.dev.spring_security_basics.jwt;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -44,24 +43,18 @@ public class JwtSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         // https://github.com/spring-projects/spring-security/issues/1231
         // https://docs.spring.io/spring-boot/docs/current/reference/html/data.html#data.sql.h2-web-console.spring-security
+
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                	.requestMatchers("/authenticate").permitAll()
-                	.requestMatchers(PathRequest.toH2Console()).permitAll() // h2-console is a servlet and NOT recommended for a production
-                    .requestMatchers(HttpMethod.OPTIONS,"/**")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated())
+                        .requestMatchers("/authenticate").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**")
+                        .permitAll()
+                        .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.
-                	sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                //.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt) // Deprecated in SB 3.1.x
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults())) // Starting from SB 3.1.x using Lambda DSL
-                .httpBasic(
-                        Customizer.withDefaults())
-//                .headers(header -> { // Deprecated in SB 3.1.x
-//                    header.frameOptions().sameOrigin();
-//                })
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()))
+                .httpBasic(Customizer.withDefaults())
                 .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) // Starting from SB 3.1.x using Lambda DSL
                 .build();
     }
@@ -77,10 +70,9 @@ public class JwtSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withUsername("dev")
-                                .password("{noop}test1234")
-                                .authorities("read")
-                                .roles("USER")
-                                .build();
+                .password("{noop}test1234")
+                .roles("USER")
+                .build();
 
         return new InMemoryUserDetailsManager(user);
     }
@@ -89,8 +81,8 @@ public class JwtSecurityConfig {
     public JWKSource<SecurityContext> jwkSource() {
         JWKSet jwkSet = new JWKSet(rsaKey());
 
-        return (((jwkSelector, securityContext) 
-                        -> jwkSelector.select(jwkSet)));
+        return (((jwkSelector, securityContext)
+                -> jwkSelector.select(jwkSet)));
     }
 
     @Bean
@@ -104,11 +96,11 @@ public class JwtSecurityConfig {
                 .withPublicKey(rsaKey().toRSAPublicKey())
                 .build();
     }
-    
+
     @Bean
     public RSAKey rsaKey() {
         KeyPair keyPair = keyPair();
-        
+
         return new RSAKey
                 .Builder((RSAPublicKey) keyPair.getPublic())
                 .privateKey((RSAPrivateKey) keyPair.getPrivate())
@@ -127,7 +119,7 @@ public class JwtSecurityConfig {
                     "Unable to generate an RSA Key Pair", e);
         }
     }
-    
+
 }
 
 

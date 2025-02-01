@@ -1,8 +1,4 @@
-package com.dev.spring_boot_full_stack_basics.jwt;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.stream.Collectors;
+package com.dev.spring_security_basics.jwt;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,9 +7,13 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.stream.Collectors;
+
 @Service
 public class JwtTokenService {
-    
+
     private final JwtEncoder jwtEncoder;
 
     public JwtTokenService(JwtEncoder jwtEncoder) {
@@ -21,20 +21,19 @@ public class JwtTokenService {
     }
 
     public String generateToken(Authentication authentication) {
-
         var scope = authentication
-                        .getAuthorities()
-                        .stream()
-                        .map(GrantedAuthority::getAuthority)
-                        .collect(Collectors.joining(" "));
+                .getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(" "));
 
         var claims = JwtClaimsSet.builder()
-                        .issuer("self")
-                        .issuedAt(Instant.now())
-                        .expiresAt(Instant.now().plus(90, ChronoUnit.MINUTES))
-                        .subject(authentication.getName())
-                        .claim("scope", scope)
-                        .build();
+                .issuer("self")
+                .issuedAt(Instant.now())
+                .expiresAt(Instant.now().plus(90, ChronoUnit.MINUTES))
+                .subject(authentication.getName())
+                .claim("scope", scope)
+                .build();
 
         return this.jwtEncoder
                 .encode(JwtEncoderParameters.from(claims))

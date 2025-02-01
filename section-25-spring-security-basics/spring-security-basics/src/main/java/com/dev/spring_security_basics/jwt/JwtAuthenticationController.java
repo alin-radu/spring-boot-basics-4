@@ -1,4 +1,4 @@
-package com.dev.spring_boot_full_stack_basics.jwt;
+package com.dev.spring_security_basics.jwt;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class JwtAuthenticationController {
-    
+
     private final JwtTokenService tokenService;
-    
+
     private final AuthenticationManager authenticationManager;
 
-    public JwtAuthenticationController(JwtTokenService tokenService, 
-            AuthenticationManager authenticationManager) {
+    public JwtAuthenticationController(JwtTokenService tokenService,
+                                       AuthenticationManager authenticationManager) {
         this.tokenService = tokenService;
         this.authenticationManager = authenticationManager;
     }
@@ -23,19 +23,17 @@ public class JwtAuthenticationController {
     @PostMapping("/authenticate")
     public ResponseEntity<JwtTokenResponse> generateToken(
             @RequestBody JwtTokenRequest jwtTokenRequest) {
-        
-        var authenticationToken = 
+
+        var authenticationToken =
                 new UsernamePasswordAuthenticationToken(
-                        jwtTokenRequest.username(), 
+                        jwtTokenRequest.username(),
                         jwtTokenRequest.password());
-        
-        var authentication = 
+
+        var authentication =
                 authenticationManager.authenticate(authenticationToken);
-        
+
         var token = tokenService.generateToken(authentication);
-        
+
         return ResponseEntity.ok(new JwtTokenResponse(token));
     }
 }
-
-

@@ -1,5 +1,6 @@
 package com.dev.spring_security_basics.controller;
 
+import com.dev.spring_security_basics.model.Todo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,4 @@ public class ToDoController {
     }
 };
 
-record Todo(String username, String description) {
-};
+
